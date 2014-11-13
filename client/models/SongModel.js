@@ -4,6 +4,7 @@ var SongModel = Backbone.Model.extend({
   initialize: function(){
     this.set('counter', 0);
     this.set('votes', 0);
+    this.set('isCurrentSong', false);
   },
 
   addCounter: function() {
