@@ -12,7 +12,6 @@ var PlayerView = Backbone.View.extend({
 
   ended: function() {
     console.log("THE SONG ENDED!!");
-    debugger;
     this.model.ended();
   },
 
