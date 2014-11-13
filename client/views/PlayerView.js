@@ -16,6 +16,9 @@ var PlayerView = Backbone.View.extend({
   },
 
   setSong: function(song){
+    if(song){
+      song.addCounter();
+    }
     this.model = song;
     this.render();
   },
