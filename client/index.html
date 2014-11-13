@@ -3,34 +3,40 @@
   <body>
     <!-- Scripts may be placed anywhere on a page. But FYI, they block rendering of elements
      below them until after the scripts load-->
+    <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
     <script src="bower_components/backbone/backbone.js"></script>
 
+    <!-- song data -->
     <script src="data/data.js"></script>
 
+    <!-- models and collections -->
     <script src="models/SongModel.js"></script>
     <script src="collections/Songs.js"></script>
     <script src="collections/SongQueue.js"></script>
     <script src="models/AppModel.js"></script>
 
+    <!-- views -->
     <script src="views/PlayerView.js"></script>
     <script src="views/LibraryView.js"></script>
     <script src="views/LibraryEntryView.js"></script>
     <script src="views/AppView.js"></script>
+    <script src="views/SongQueueEntryView.js"></script>
+    <script src="views/SongQueueView.js"></script>
 
     <script>
-      $(function(){
+      //$(function(){
         // set up model objects
-        var library = new Songs(songData);
-        var app = new AppModel({library: library});
+        var library = new Songs(songData); //This is a collection!
+        var app = new AppModel({library: library}); //this is an app model
 
         // build a view for the top level of the whole app
-        var appView = new AppView({model: app});
+        var appView = new AppView({model: app}); //this the view for the app model
 
         // put the view onto the screen
-        $('body').append(appView.render());
-      });
+        $('body').append(appView.render()); //apend the view to the DOM
+      //});
     </script>
   </body>
 </html>
