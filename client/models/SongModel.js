@@ -2,11 +2,22 @@
 var SongModel = Backbone.Model.extend({
 
   initialize: function(){
-    this.set('counter',0);
+    this.set('counter', 0);
+    this.set('votes', 0);
   },
 
-  addCounter : function() {
+  addCounter: function() {
     this.set('counter', this.get('counter')+1);
+  },
+
+  upvote: function() {
+    this.set('votes', this.get('votes')+1);
+    this.trigger('orderChangeEvent', this);
+  },
+
+  downvote: function() {
+    this.set('votes', this.get('votes')-1);
+    this.trigger('orderChangeEvent', this);
   },
 
   play: function(){

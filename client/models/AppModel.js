@@ -30,6 +30,10 @@ var AppModel = Backbone.Model.extend({
       this.set('currentSong', this.get('songQueue').at(0) || '');
     }, this);
 
+    params.library.on('orderChangeEvent', function(song){
+      this.get('songQueue').sort();
+    }, this);
+
   }
 
 });
