@@ -6,11 +6,14 @@ var PlayerView = Backbone.View.extend({
   el: '<audio controls autoplay />',
 
   initialize: function() {
-    this.el.addEventListener("ended",this.ended);
+    var self = this;
+    this.el.addEventListener("ended",self.ended.bind(self));
   },
 
   ended: function() {
     console.log("THE SONG ENDED!!");
+    debugger;
+    this.model.ended();
   },
 
   setSong: function(song){

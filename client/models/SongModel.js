@@ -12,6 +12,10 @@ var SongModel = Backbone.Model.extend({
 
   dequeue: function() {
     this.trigger('dequeueEvent', this);
+  },
+
+  ended: function(){
+    this.trigger('endedEvent', this);
   }
 
 });
