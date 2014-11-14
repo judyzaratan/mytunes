@@ -16,12 +16,12 @@ var PlayerView = Backbone.View.extend({
   },
 
   setSong: function(song){
-    if(song){
+    this.model = song;
+    if(song && !!song.addCounter){
       song.addCounter();
       song.set('isCurrentSong', true);
+      this.render();
     }
-    this.model = song;
-    this.render();
   },
 
   render: function(){

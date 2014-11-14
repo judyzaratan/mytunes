@@ -6,10 +6,20 @@
     <!-- dependencies -->
     <script src="bower_components/jquery/jquery.min.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script type="text/javascript" src="lib/require.js"></script>
+    <!-- <script type="text/javascript" src="bower_components/requirejs/require.js"></script> -->
     <script src="bower_components/backbone/backbone.js"></script>
     <script src="bower_components/backbone/backbone.localStorage-min.js"></script>
-
+    <!-- <script>
+        require.config({
+            paths: {
+                jquery: "lib/jquery",
+                underscore: "lib/underscore",
+                backbone: "lib/backbone",
+                localstorage: "lib/backbone.localStorage"
+            }
+        });
+    </script>
+ -->
     <!-- song data -->
     <script src="data/data.js"></script>
 
@@ -28,10 +38,21 @@
     <script src="views/SongQueueView.js"></script>
 
     <script>
-      //$(function(){
+      //$('document').ready(function() {
         // set up model objects
         var library = new Songs(songData); //This is a collection!
-        var app = new AppModel({library: library}); //this is an app model
+        library.fetch({success: function(data){
+            console.log(data);
+            if(data.models.length === 0){
+                console.log('zero models');
+                library = new Songs(songData);
+                library.saveModels();
+            }
+        }});
+        var songQueue = new SongQueue();
+        songQueue.fetch();
+        var app = new AppModel({library: library, songQueue: songQueue}); //this is an app model
+        //app.fetch();
 
         // build a view for the top level of the whole app
         var appView = new AppView({model: app}); //this the view for the app model

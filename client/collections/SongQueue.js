@@ -1,6 +1,6 @@
 // SongQueue.js - Defines a backbone model class for the song queue.
 var SongQueue = Songs.extend({
-  localStorage: new Backbone.LocalStorage("SongQueue"),
+  localStorage: new Backbone.LocalStorage("songQueueueue"),
   comparator: function(song){
     //if the song is the current song, then leave it on top
     if(song.get('isCurrentSong')){
