@@ -1,6 +1,6 @@
 // App.js - Defines a backbone model class for the whole app.
 var AppModel = Backbone.Model.extend({
-//  localStorage: new Backbone.LocalStorage("slifhsiskdfhugh"),
+  localStorage: new Backbone.LocalStorage("slifhsiskdfhugh"),
   initialize: function(params){
     this.set('currentSong', new SongModel());
     this.set('songQueue', params.songQueue);
@@ -20,7 +20,8 @@ var AppModel = Backbone.Model.extend({
       }
     }, this);
 
-    params.library.on('dequeueEvent', function(song) {
+    params.songQueue.on('dequeueEvent', function(song) {
+      console.log("it heard the dequeueEvent");
       this.get('songQueue').remove(song);
       this.get('songQueue').localStorage.destroy(song);
       if(this.get('currentSong') === song){
@@ -28,13 +29,13 @@ var AppModel = Backbone.Model.extend({
       }
     }, this);
 
-    params.library.on('endedEvent', function(song) {
+    params.songQueue.on('endedEvent', function(song) {
       this.get('songQueue').remove(song);
       this.get('songQueue').localStorage.destroy(song);
       this.set('currentSong', this.get('songQueue').at(0) || '');
     }, this);
 
-    params.library.on('orderChangeEvent', function(song){
+    params.songQueue.on('orderChangeEvent', function(song){
       this.get('songQueue').sort();
     }, this);
 

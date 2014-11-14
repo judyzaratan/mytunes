@@ -36,6 +36,7 @@
     <script src="views/AppView.js"></script>
     <script src="views/SongQueueEntryView.js"></script>
     <script src="views/SongQueueView.js"></script>
+    <script src="models/router.js"></script>
 
     <script>
       //$('document').ready(function() {
@@ -56,6 +57,14 @@
 
         // build a view for the top level of the whole app
         var appView = new AppView({model: app}); //this the view for the app model
+        var app_router = new MyTunes;
+
+         app_router.on('route:defaultRoute', function(actions) {
+             alert(actions);
+         })
+
+         // Start Backbone history a necessary step for bookmarkable URL's
+         Backbone.history.start();
 
         // put the view onto the screen
         $('body').append(appView.render()); //apend the view to the DOM
